@@ -1,0 +1,6 @@
+12-5-2025
+- Set up skeleton for back-end 
+- Created init_tables file to populate tables into database
+- Started on login and register routes, created transactions in pgAdmin
+- Have yet to test login and register routes
+

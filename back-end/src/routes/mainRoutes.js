@@ -1,0 +1,33 @@
+//gyxk01.24@ichat.sp.edu.sg P2424431 DIT/FT/2A/01
+//////////////////////////////////////////////////////
+// REQUIRED MODULES
+//////////////////////////////////////////////////////
+const express = require('express');
+
+//////////////////////////////////////////////////////
+// IMPORT CONTROLLERS
+//////////////////////////////////////////////////////
+const userController = require('../controllers/userController.js');
+const jwtMiddleware = require('../middlewares/jwtMiddleware.js');
+
+//////////////////////////////////////////////////////
+// CREATE ROUTER
+//////////////////////////////////////////////////////
+const router = express.Router();
+
+//////////////////////////////////////////////////////
+// DEFINE ROUTES FOR USER
+//////////////////////////////////////////////////////
+router.post("/send-otp", userController.sendOtp);
+
+// Verify OTP and issue token route
+router.post("/verify-otp", userController.verifyOtp, jwtMiddleware.generateToken, jwtMiddleware.sendToken);
+
+// Register route
+router.post("/register", userController.checkEmailExist, userController.register, jwtMiddleware.generateToken, jwtMiddleware.sendToken);
+router.post("/jwt/generate", jwtMiddleware.generateToken, jwtMiddleware.sendToken);
+
+//////////////////////////////////////////////////////
+// EXPORT ROUTER
+//////////////////////////////////////////////////////
+module.exports = router;
